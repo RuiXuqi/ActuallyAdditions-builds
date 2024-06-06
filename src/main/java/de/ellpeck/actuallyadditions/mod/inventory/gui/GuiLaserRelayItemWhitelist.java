@@ -39,8 +39,8 @@ import java.util.List;
 public class GuiLaserRelayItemWhitelist extends AAScreen<ContainerLaserRelayItemWhitelist> {
 
     private static final ResourceLocation RES_LOC = AssetUtil.getGuiLocation("gui_laser_relay_item_whitelist");
-    private final Component inboundText = Component.translatable("info." + ActuallyAdditions.MODID + ".gui.inbound");
-    private final Component outboundText = Component.translatable("info." + ActuallyAdditions.MODID + ".gui.outbound");
+    private final Component inboundText = Component.translatable("info.actuallyadditions.gui.inbound");
+    private final Component outboundText = Component.translatable("info.actuallyadditions.gui.outbound");
     private final TileEntityLaserRelayItemAdvanced tile;
 
     private FilterSettingsGui leftFilter;
@@ -97,16 +97,15 @@ public class GuiLaserRelayItemWhitelist extends AAScreen<ContainerLaserRelayItem
     @Override
     public void render(@Nonnull GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
         super.render(guiGraphics, mouseX, mouseY, partialTicks);
+        this.leftFilter.drawHover(guiGraphics, mouseX, mouseY);
+        this.rightFilter.drawHover(guiGraphics, mouseX, mouseY);
 
         if (this.buttonSmartWhitelistLeft.isMouseOver(mouseX, mouseY) || this.buttonSmartWhitelistRight.isMouseOver(mouseX, mouseY)) {
             List<FormattedCharSequence> list = new ArrayList<>();
-            list.add(Component.translatable("info." + ActuallyAdditions.MODID + ".gui.smart").withStyle(ChatFormatting.BOLD).getVisualOrderText());
-            list.addAll(this.font.split(Component.translatable("info." + ActuallyAdditions.MODID + ".gui.smartInfo"), 200));
+            list.add(Component.translatable("info.actuallyadditions.gui.smart").withStyle(ChatFormatting.BOLD).getVisualOrderText());
+            list.addAll(this.font.split(Component.translatable("info.actuallyadditions.gui.smartInfo"), 200));
             guiGraphics.renderTooltip(this.font, list, mouseX, mouseY); //renderTooltip
         }
-
-        this.leftFilter.drawHover(guiGraphics, mouseX, mouseY);
-        this.rightFilter.drawHover(guiGraphics, mouseX, mouseY);
     }
 
     @Override

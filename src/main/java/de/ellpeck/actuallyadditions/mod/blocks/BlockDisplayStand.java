@@ -76,7 +76,7 @@ public class BlockDisplayStand extends BlockContainerBase {
 							heldItem.shrink(1);
 						else
 							player.swing(hand, true);
-						return InteractionResult.CONSUME;
+						return InteractionResult.SUCCESS;
 					} else if (ItemUtil.canBeStacked(heldItem, stackThere)) {
 						int maxTransfer = Math.min(stackThere.getCount(), heldItem.getMaxStackSize() - heldItem.getCount());
 						if (maxTransfer > 0) {
@@ -87,7 +87,7 @@ public class BlockDisplayStand extends BlockContainerBase {
 							ItemStack newStackThere = stackThere.copy();
 							newStackThere.shrink(maxTransfer);
 							stand.inv.setStackInSlot(0, newStackThere);
-							return InteractionResult.CONSUME;
+							return InteractionResult.SUCCESS;
 						}
 					}
 				} else {
@@ -104,11 +104,15 @@ public class BlockDisplayStand extends BlockContainerBase {
 		return InteractionResult.CONSUME;
 	}
 
-	@Override
+/*	@Override
 	public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
 		if (this.isEmpowerer) {
 			return VoxelShapes.EMPOWERER_SHAPE;
 		}
 		return VoxelShapes.DISPLAY_STAND_SHAPE;
+	}*/
+	@Override
+	public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
+		return VoxelShapes.SIMPLE_STAND_SHAPE;
 	}
 }

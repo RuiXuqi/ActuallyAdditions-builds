@@ -64,7 +64,7 @@ public class BlockAtomicReconstructor extends FullyDirectionalBlock.Container im
     public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         ItemStack heldItem = player.getItemInHand(hand);
         if (this.tryToggleRedstone(world, pos, player)) {
-            return InteractionResult.CONSUME;
+            return InteractionResult.SUCCESS;
         }
         if (!world.isClientSide) {
             TileEntityAtomicReconstructor reconstructor = (TileEntityAtomicReconstructor) world.getBlockEntity(pos);
@@ -94,7 +94,7 @@ public class BlockAtomicReconstructor extends FullyDirectionalBlock.Container im
         return InteractionResult.CONSUME;
     }
 
-    @Override
+/*    @Override
     public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
         switch (state.getValue(FACING)) {
             case UP:
@@ -110,7 +110,7 @@ public class BlockAtomicReconstructor extends FullyDirectionalBlock.Container im
             default:
                 return VoxelShapes.AtomicReconstructorShapes.SHAPE_N;
         }
-    }
+    }*/
 
     @Nullable
     @Override
@@ -184,7 +184,7 @@ public class BlockAtomicReconstructor extends FullyDirectionalBlock.Container im
                     energy = BET.getInt("Energy");
                 }
                 NumberFormat format = NumberFormat.getInstance();
-                pTooltip.add(Component.translatable("misc.actuallyadditions.power_single", format.format(energy)));
+                pTooltip.add(Component.translatable("misc.actuallyadditions.power_single", format.format(energy)).withStyle(ChatFormatting.GRAY));
 
                 if (BET.contains("IsPulseMode")) {
                     pTooltip.add(Component.translatable("info.actuallyadditions.redstoneMode").append(": ")

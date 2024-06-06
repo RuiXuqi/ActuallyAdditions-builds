@@ -159,18 +159,18 @@ public class TileEntityLaserRelayItem extends TileEntityLaserRelay {
     @Override
     @OnlyIn(Dist.CLIENT)
     public Component getExtraDisplayString() {
-        return Component.translatable("info." + ActuallyAdditions.MODID + ".laserRelay.item.extra").append(": ").append(Component.literal(String.valueOf(this.getPriority())).withStyle(ChatFormatting.DARK_RED));
+        return Component.translatable("info.actuallyadditions.laserRelay.item.extra").append(": ").append(Component.literal(String.valueOf(this.getPriority())).withStyle(ChatFormatting.DARK_RED));
     }
 
     @Override
     @OnlyIn(Dist.CLIENT)
     public Component getCompassDisplayString() {
-        return Component.translatable("info." + ActuallyAdditions.MODID + ".laserRelay.item.display.1").append("\n").append(Component.translatable("info." + ActuallyAdditions.MODID + ".laserRelay.item.display.2")).withStyle(ChatFormatting.GREEN);
+        return Component.translatable("info.actuallyadditions.laserRelay.item.display.1").append(" - ").append(Component.translatable("info.actuallyadditions.laserRelay.item.display.2")).withStyle(ChatFormatting.GREEN);
     }
 
     @Override
     public void onCompassAction(Player player) {
-        if (player.isShiftKeyDown()) {
+        if (player.isCrouching()) {
             this.priority--;
         } else {
             this.priority++;

@@ -104,7 +104,7 @@ public class BlockLaserRelay extends FullyDirectionalBlock.Container implements 
         BlockEntity tile = world.getBlockEntity(pos);
         if (tile instanceof TileEntityLaserRelay relay) {
 
-	        if (StackUtil.isValid(stack)) {
+            if (!stack.isEmpty()) {
                 if (stack.getItem() instanceof ItemLaserWrench) {
                     return InteractionResult.FAIL;
                 } else if (stack.getItem() == CommonConfig.Other.relayConfigureItem) {
@@ -120,10 +120,10 @@ public class BlockLaserRelay extends FullyDirectionalBlock.Container implements 
                         relay.sendUpdate();
                     }
 
-                    return InteractionResult.PASS;
+                    return InteractionResult.SUCCESS;
                 } else if (stack.getItem() instanceof ItemLaserRelayUpgrade) {
                     ItemStack inRelay = relay.inv.getStackInSlot(0);
-                    if (!StackUtil.isValid(inRelay)) {
+                    if (inRelay.isEmpty()) {
                         if (!world.isClientSide) {
                             if (!player.isCreative()) {
                                 player.setItemInHand(hand, StackUtil.shrink(stack, 1));
@@ -141,7 +141,7 @@ public class BlockLaserRelay extends FullyDirectionalBlock.Container implements 
 
             if (player.isShiftKeyDown()) {
                 ItemStack inRelay = relay.inv.getStackInSlot(0).copy();
-                if (StackUtil.isValid(inRelay)) {
+                if (!inRelay.isEmpty()) {
                     if (!world.isClientSide) {
                         relay.inv.setStackInSlot(0, ItemStack.EMPTY);
 
@@ -221,7 +221,7 @@ public class BlockLaserRelay extends FullyDirectionalBlock.Container implements 
                         if (compass) {
                             expl = relay.getCompassDisplayString();
                         } else {
-                            expl = Component.translatable("info." + ActuallyAdditions.MODID + ".laserRelay.mode.noCompasss", Component.translatable(CommonConfig.Other.relayConfigureItem.getDescriptionId()).getString()).withStyle(ChatFormatting.GRAY, ChatFormatting.ITALIC);
+                            expl = Component.translatable("info.actuallyadditions.laserRelay.mode.noCompasss", Component.translatable(CommonConfig.Other.relayConfigureItem.getDescriptionId()).getString()).withStyle(ChatFormatting.GRAY, ChatFormatting.ITALIC);
                         }
 
                         guiGraphics.drawString(minecraft.font, expl, (int) (resolution.getGuiScaledWidth() / 2f + 5), (int) (resolution.getGuiScaledHeight() / 2f + 15), 0xFFFFFF);

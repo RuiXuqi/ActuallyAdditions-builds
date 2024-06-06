@@ -49,13 +49,13 @@ public class BlockLongRangeBreaker extends FullyDirectionalBlock.Container {
     @Override
     public InteractionResult use(BlockState state, Level world, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
         if (this.tryToggleRedstone(world, pos, player)) {
-            return InteractionResult.PASS;
+            return InteractionResult.SUCCESS;
         }
 
         return this.openGui(world, player, pos, TileEntityLongRangeBreaker.class);
     }
 
-    @Override
+/*    @Override
     public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
         switch (state.getValue(FACING)) {
             case UP:
@@ -71,5 +71,5 @@ public class BlockLongRangeBreaker extends FullyDirectionalBlock.Container {
             default:
                 return VoxelShapes.BlockBreakerShapes.SHAPE_N;
         }
-    }
+    }*/
 }
